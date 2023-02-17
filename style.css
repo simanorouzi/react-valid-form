@@ -1,0 +1,12 @@
+h1,
+p {
+  font-family: Lato;
+}
+
+input.invalid {
+  background-color: rgb(247, 144, 144);
+  border: solid 1px red;
+}
+.valid-error label {
+  color: red;
+}
