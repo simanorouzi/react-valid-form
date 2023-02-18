@@ -2,8 +2,6 @@ import * as React from 'react';
 import { enteredValueType, isValidType } from '../Component/Types';
 
 const ValidForm = () => {
-  const expretion =
-    '/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/i';
   let formIsValid = false;
   const [enteredValue, setEnteredValue] = React.useState<enteredValueType>({
     name: '',
