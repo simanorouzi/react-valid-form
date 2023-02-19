@@ -10,3 +10,10 @@ input.invalid {
 .valid-error label {
   color: red;
 }
+
+.line {
+  height: 1px;
+  width: 100%;
+  border: solid 1px #000;
+  margin: 10px 0;
+}
