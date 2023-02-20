@@ -2,7 +2,18 @@ h1,
 p {
   font-family: Lato;
 }
-
+form > div {
+  margin: 10px 0;
+}
+form label {
+  width: 80px;
+  display: inline-block;
+}
+input {
+  border: solid 1px #eee;
+  border-radius: 5px;
+  margin-left: 5px;
+}
 input.invalid {
   background-color: rgb(247, 144, 144);
   border: solid 1px red;
@@ -16,4 +27,9 @@ input.invalid {
   width: 100%;
   border: solid 1px #000;
   margin: 10px 0;
+}
+.error-message {
+  color: red;
+  margin-left: 5px;
+  font-size: 10px;
 }

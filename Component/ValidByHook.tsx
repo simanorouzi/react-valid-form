@@ -2,6 +2,10 @@ import * as React from 'react';
 import useValid from '../Hooks/use-validate';
 
 const ValidByHook = () => {
+  const emptyValidation = (inputValue) => inputValue !== '';
+  const emailValidation = (inputValue) =>
+    inputValue !== '' && inputValue.includes('@');
+
   const {
     inputValue: nameValue,
     inputIsTouched: nameIsTouched,
@@ -10,7 +14,7 @@ const ValidByHook = () => {
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
     resetInput: resetName,
-  } = useValid((inputValue) => inputValue !== '');
+  } = useValid(emptyValidation);
 
   const {
     inputValue: lastnameValue,
@@ -20,7 +24,7 @@ const ValidByHook = () => {
     valueChangeHandler: lastnameChangeHandler,
     inputBlurHandler: lastnameBlurHandler,
     resetInput: resetLastname,
-  } = useValid((inputValue) => inputValue !== '');
+  } = useValid(emptyValidation);
 
   const {
     inputValue: emailValue,
@@ -30,7 +34,7 @@ const ValidByHook = () => {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     resetInput: resetEmail,
-  } = useValid((inputValue) => inputValue !== '' && inputValue.includes('@'));
+  } = useValid(emailValidation);
 
   const formIsValid = nameIsValid && lastnameIsValid && emailIsValid;
 
@@ -58,7 +62,11 @@ const ValidByHook = () => {
     emailBlurHandler();
   };
 
-  const formSubmitHandler = () => {
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    if (!formIsValid) {
+      return;
+    }
     resetName();
     resetLastname();
     resetEmail();
@@ -69,29 +77,38 @@ const ValidByHook = () => {
         <label>Name:</label>
         <input
           type="text"
+          value={nameValue}
           className={nameHasError ? 'invalid' : ''}
           onChange={nameInputChangeHandler}
           onBlur={nameInputBlurHandler}
         />
+        {nameHasError && <label className="error-message">Name is empty</label>}
       </div>
       <div>
         <label>Lastname:</label>
         <input
           type="text"
+          value={lastnameValue}
           className={lastnameHasError ? 'invalid' : ''}
           onChange={lastnameInputChangeHandler}
           onBlur={lastnameInputBlurHandler}
         />
+        {lastnameHasError && (
+          <label className="error-message">LastName is empty</label>
+        )}
       </div>
       <div>
         <label>Email:</label>
         <input
           type="text"
+          value={emailValue}
           className={emailHasError ? 'invalid' : ''}
           onChange={emailInputChangeHandler}
           onBlur={emailInputBlurHandler}
         />
-        {emailHasError && <label>Email is invalid</label>}
+        {emailHasError && (
+          <label className="error-message">Email is invalid</label>
+        )}
       </div>
       <div>
         <button disabled={!formIsValid}>Submit</button>
